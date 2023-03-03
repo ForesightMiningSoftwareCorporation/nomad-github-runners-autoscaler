@@ -8,6 +8,7 @@ const dispatchJob = async function(name, payload) {
     const available_node_classes = ["standard", "gpu"]
     let node_class = "standard"
 
+    console.log(payload.workflow_job.labels)
 
     // only target events with "self-hosted" label
     const triggerConditions = (
