@@ -5,6 +5,10 @@ const dispatchJob = async function(name, payload) {
     const nomadToken = process.env.NOMAD_TOKEN || ""
     const nomadJobId = process.env.NOMAD_JOB_ID || ""
 
+    const available_node_classes = ["standard", "gpu"]
+    let node_class = "standard"
+
+
     // only target events with "self-hosted" label
     const triggerConditions = (
         payload.workflow_job.labels.length > 0 &&
@@ -12,10 +16,16 @@ const dispatchJob = async function(name, payload) {
     );
     if (!triggerConditions) return Promise.resolve();
 
+    for (const label of payload.workflow_job.labels) {
+        if (available_node_classes.includes(label)) {
+            node_class = label
+        }
+    }
     const data = await got.post(`${nomadHost}/v1/job/${nomadJobId}/dispatch`, {
         json: {
             'Meta': {
                 'GH_REPO_URL': payload.repository.html_url,
+                'NODE_CLASS': node_class,
             },
         },
         headers: {

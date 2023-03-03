@@ -1,6 +1,6 @@
 # nomad-github-runners-autoscaler
 
-A demo-purpose Node.js application that listens to the GitHub Webhooks event (`workflow_job.queued`) and dispatches Nomad parameterized jobs using Nomad HTTP API to launch "on-demand" GitHub Actions Self-hosted Runners easily and efficiently.
+A Application that listens to the GitHub Webhooks event (`workflow_job.queued`) and dispatches Nomad parameterized jobs using Nomad HTTP API to launch "on-demand" GitHub Actions Self-hosted Runners easily and efficiently.
 
 This application implements the suggested autoscaling pattern mentioned in the GitHub documentation below:
 
@@ -9,12 +9,6 @@ This application implements the suggested autoscaling pattern mentioned in the G
 ### (optional) Horizontal Nomad Cluster Autoscaling
 
 While this demo app shows you a conceptual way of auto-scaling GitHub Actions Self-hosted runners on your Nomad Cluster, you may also want to ensure that there is always an appropriate amount of Nomad cluster resource to run your runners' workload at scale. This is achievable by using [Nomad Autoscaler](https://www.nomadproject.io/tools/autoscaling).
-
-## Deploy to Docker
-
-You may use a pre-built example `jrsyo/nomad-github-runners-autoscaler:alpha` image on the Docker Hub, or build your own using the `Dockerfile` in this repository.
-
-- https://hub.docker.com/r/jrsyo/nomad-github-runners-autoscaler/tags
 
 ### Environment Variables
 
