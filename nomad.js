@@ -8,7 +8,6 @@ const dispatchJob = async function(name, payload) {
     const available_node_classes = ["standard", "gpu"]
     let node_class = "standard"
 
-    console.log(payload.workflow_job.labels)
 
     // only target events with "self-hosted" label
     const triggerConditions = (
@@ -22,11 +21,10 @@ const dispatchJob = async function(name, payload) {
             node_class = label
         }
     }
-    const data = await got.post(`${nomadHost}/v1/job/${nomadJobId}/dispatch`, {
+    const data = await got.post(`${nomadHost}/v1/job/${nomadJobId}-${node_class}/dispatch`, {
         json: {
             'Meta': {
                 'GH_REPO_URL': payload.repository.html_url,
-                'NODE_CLASS': node_class,
             },
         },
         headers: {
