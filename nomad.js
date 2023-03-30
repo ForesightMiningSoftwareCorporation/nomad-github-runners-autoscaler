@@ -4,6 +4,7 @@ const dispatchJob = async function(name, payload) {
     const nomadHost = process.env.NOMAD_HOST || "http://127.0.0.1"
     const nomadToken = process.env.NOMAD_TOKEN || ""
     const nomadJobId = process.env.NOMAD_JOB_ID || ""
+    const nomadNamespace = process.env.NOMAD_NAMESPACE || "default"
 
     const available_node_classes = ["standard", "gpu"]
     let node_class = "standard"
@@ -26,6 +27,7 @@ const dispatchJob = async function(name, payload) {
             'Meta': {
                 'GH_REPO_URL': payload.repository.html_url,
             },
+            'namespace': nomadNamespace
         },
         headers: {
             'X-Nomad-Token': nomadToken
