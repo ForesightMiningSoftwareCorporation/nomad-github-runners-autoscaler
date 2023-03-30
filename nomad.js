@@ -57,8 +57,6 @@ const dispatchJob = async function(name, payload) {
             }
         }).json();
     } catch (error) {
-      console.error(error.message);
-      console.error(error.response.body);
         if (error.response.statusCode === 400) {
           console.error(error.response.body);
         } else {
