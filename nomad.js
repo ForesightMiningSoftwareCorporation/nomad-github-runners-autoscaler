@@ -22,17 +22,27 @@ const dispatchJob = async function(name, payload) {
             node_class = label
         }
     }
-    const data = await got.post(`${nomadHost}/v1/job/${nomadJobId}-${node_class}/dispatch`, {
-        json: {
-            'Meta': {
-                'GH_REPO_URL': payload.repository.html_url,
+    try {
+        const data = await got.post(`${nomadHost}/v1/job/${nomadJobId}-${node_class}/dispatch`, {
+            json: {
+                'Meta': {
+                    'GH_REPO_URL': payload.repository.html_url,
+                },
+                'namespace': nomadNamespace
             },
-            'namespace': nomadNamespace
-        },
-        headers: {
-            'X-Nomad-Token': nomadToken
+            headers: {
+                'X-Nomad-Token': nomadToken
+            }
+        }).json();
+    } catch (error) {
+      console.error(error.message);
+      console.error(error.response.body);
+        if (error.response.statusCode === 400) {
+          console.error(error.response.body);
+        } else {
+          console.error(error.message);
         }
-    }).json();
+    }
     console.log(`Job ID: ${nomadJobId} has been dispatched.`)
     console.log(data)
 
