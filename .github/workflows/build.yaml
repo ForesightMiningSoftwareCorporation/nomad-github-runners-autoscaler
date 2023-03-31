@@ -49,4 +49,4 @@ jobs:
           dockerfile: Dockerfile_runner
           tags: |
             ghcr.io/foresightminingsoftwarecorporation/github-runner:latest
-            ghcr.io/foresightminingsoftwarecorporation/github-runner:${{ github.short_sha }}
+            ghcr.io/foresightminingsoftwarecorporation/github-runner:${{ github.sha }}
