@@ -2,7 +2,7 @@ import got from "got";
 import https from "https";
 import fs from "fs";
 
-const dispatchJob = async function(name, payload) {
+const dispatchJob = async function (name, payload) {
     const nomadHost = process.env.NOMAD_HOST || "http://127.0.0.1"
     const nomadToken = process.env.NOMAD_TOKEN || ""
     const nomadJobId = process.env.NOMAD_JOB_ID || ""
@@ -58,13 +58,12 @@ const dispatchJob = async function(name, payload) {
         }).json();
     } catch (error) {
         if (error.response.statusCode === 400) {
-          console.error(error.response.body);
+            console.error(error.response.body);
         } else {
-          console.error(error.message);
+            console.error(error.message);
         }
     }
     console.log(`Job ID: ${nomadJobId} has been dispatched.`)
-    console.log(data)
 
     return Promise.resolve()
 }
