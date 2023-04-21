@@ -27,6 +27,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/foresightminingsoftwarecorporation/github-runner-server:latest
+
   build-runner:
     runs-on: ubuntu-latest
     steps:
